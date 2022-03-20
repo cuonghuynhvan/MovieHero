@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Movie Hero</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDHQdxblNZuNovkCquv7OeIK7oDlvemyP8</string>
+    <string name="placeholder_search">Enter cinema name, location,...</string>
+    <string name="label_loading">Loading...</string>
 </resources>

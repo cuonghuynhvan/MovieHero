@@ -10,19 +10,4 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LocationViewModel @Inject constructor() : ViewModel() {
-
-    private val _state = MutableStateFlow(LocationContentState())
-    val state = _state.asStateFlow()
-
-    val onSearchValueChange: (newValue: String) -> Unit = {
-        viewModelScope.launch {
-            _state.emit(_state.value.copy( searchValue = it ))
-        }
-    }
-
-    val onSearch: () -> Unit = {
-        viewModelScope.launch {
-
-        }
-    }
 }

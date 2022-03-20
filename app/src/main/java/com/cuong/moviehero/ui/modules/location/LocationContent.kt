@@ -14,30 +14,11 @@ import com.cuong.moviehero.ui.theme.MovieHeroTheme
 @Composable
 fun LocationContent(
     state: LocationContentState,
-    onSearchValueChange: (newValue: String) -> Unit,
-    onSearch: () -> Unit,
+    searchContent: @Composable () -> Unit,
 ) {
-    ConstraintLayout(
-        modifier = Modifier.fillMaxSize()
-    ) {
-        GoogleMapWrapper(
-            modifier = Modifier.fillMaxSize()
-        )
-
-        val (searchBar, searchResult) = createRefs()
-        SearchTextField(
-            modifier = Modifier
-                .constrainAs(searchBar) {
-                    top.linkTo(parent.top, margin = 32.dp)
-                    start.linkTo(parent.start, margin = 16.dp)
-                    end.linkTo(parent.end, margin = 16.dp)
-                    width = Dimension.fillToConstraints
-                }
-                .statusBarsPadding(),
-            value = state.searchValue,
-            onValueChange = onSearchValueChange,
-            onSearch = onSearch,
-        )
+    BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
+        GoogleMapWrapper(modifier = Modifier.fillMaxSize())
+        searchContent()
     }
 }
 
@@ -47,8 +28,7 @@ fun LocationContentReview() {
     MovieHeroTheme() {
         LocationContent(
             state = LocationContentState(),
-            onSearchValueChange = {},
-            onSearch = {},
+            searchContent = {}
         )
     }
 }

@@ -1,6 +1,8 @@
 package com.cuong.moviehero.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
@@ -9,7 +11,9 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
@@ -25,6 +29,7 @@ fun SearchTextField(
     modifier: Modifier = Modifier,
     textStyle: TextStyle = MaterialTheme.typography.body1.plus(TextStyle(MaterialTheme.colors.onBackground)),
     keyboardOptions: KeyboardOptions = searchKeyboardOptions,
+    shape: Shape = RoundedCornerShape(32.dp),
     placeholder: String = "",
     value: String = "",
     onValueChange: (String) -> Unit = {},
@@ -36,18 +41,19 @@ fun SearchTextField(
         })
     }
 
-    Card(
+    Surface(
         modifier = modifier,
         elevation = 4.dp,
-        shape = RoundedCornerShape(32.dp),
+        shape = shape,
     ) {
         OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
             value = value,
             onValueChange = onValueChange,
             textStyle = textStyle.plus(TextStyle(MaterialTheme.colors.onBackground)),
-            shape = RoundedCornerShape(32.dp),
+            shape = shape,
             placeholder = {
                 Text(
                     text = placeholder,
