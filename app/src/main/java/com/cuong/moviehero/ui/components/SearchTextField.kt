@@ -29,11 +29,9 @@ fun SearchTextField(
     value: String = "",
     onValueChange: (String) -> Unit = {},
     onSearch: () -> Unit = {},
-)  {
-    val focusManager = LocalFocusManager.current
-    val keyboardActions = remember {
+) {
+    val keyboardActions = remember(key1 = onSearch) {
         KeyboardActions(onSearch = {
-            focusManager.clearFocus()
             onSearch()
         })
     }

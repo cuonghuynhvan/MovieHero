@@ -5,33 +5,50 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.cuong.moviehero.ui.components.GoogleMapWrapper
 import com.cuong.moviehero.ui.components.SearchTextField
 import com.cuong.moviehero.ui.theme.MovieHeroTheme
 
 @Composable
-fun LocationContent() {
-    BoxWithConstraints(
+fun LocationContent(
+    state: LocationContentState,
+    onSearchValueChange: (newValue: String) -> Unit,
+    onSearch: () -> Unit,
+) {
+    ConstraintLayout(
         modifier = Modifier.fillMaxSize()
     ) {
         GoogleMapWrapper(
             modifier = Modifier.fillMaxSize()
         )
+
+        val (searchBar, searchResult) = createRefs()
         SearchTextField(
             modifier = Modifier
-                .statusBarsPadding()
-                .padding(start = 16.dp, end = 16.dp, top = 32.dp)
-                .fillMaxWidth(),
-            value = "",
-            onValueChange = {},
+                .constrainAs(searchBar) {
+                    top.linkTo(parent.top, margin = 32.dp)
+                    start.linkTo(parent.start, margin = 16.dp)
+                    end.linkTo(parent.end, margin = 16.dp)
+                    width = Dimension.fillToConstraints
+                }
+                .statusBarsPadding(),
+            value = state.searchValue,
+            onValueChange = onSearchValueChange,
+            onSearch = onSearch,
         )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun MainContentReview() {
+fun LocationContentReview() {
     MovieHeroTheme() {
-        LocationContent()
+        LocationContent(
+            state = LocationContentState(),
+            onSearchValueChange = {},
+            onSearch = {},
+        )
     }
 }
