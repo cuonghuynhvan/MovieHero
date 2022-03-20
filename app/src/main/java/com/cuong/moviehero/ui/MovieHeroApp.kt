@@ -8,7 +8,9 @@ import com.cuong.moviehero.ui.theme.MovieHeroTheme
 
 @Composable
 fun MovieHeroApp() {
-    MovieHeroTheme {
+    MovieHeroTheme(
+        darkTheme = false,
+    ) {
         val navController = rememberNavController()
         Surface(color = MaterialTheme.colors.background) {
             NavGraph(navController)
