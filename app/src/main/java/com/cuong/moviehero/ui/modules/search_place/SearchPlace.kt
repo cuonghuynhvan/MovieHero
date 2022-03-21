@@ -9,7 +9,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 fun SearchPlace(
     viewModel: SearchPlaceViewModel = hiltViewModel()
 ) {
-    val state: SearchPlaceContentState by viewModel.state.collectAsState(SearchPlaceContentState())
+    val state: SearchPlaceContentState by viewModel.state.collectAsState()
 
     SearchPlaceContent(
         state = state,

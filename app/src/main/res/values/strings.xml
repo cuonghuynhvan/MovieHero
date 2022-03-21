@@ -2,4 +2,10 @@
     <string name="app_name">Movie Hero</string>
     <string name="placeholder_search">Enter cinema name, location,...</string>
     <string name="label_loading">Loading...</string>
+    <string name="error_message_network_connection">There is no internet connection</string>
+    <string name="error_message_location_permission_denied">Share your location to get faster, more tailored support. You need to go to setting and enable location permission</string>
+    <string name="message_request_location_rationale">Getting your exact location is important for this app. Please grant us fine location. Thank you</string>
+    <string name="message_request_location_revoked">Yay! Thanks for letting me access your approximate location. But you know what would be great? If you allow me to know where you exactly are. Thank you!</string>
+    <string name="button_request_permission">Request permissions</string>
+    <string name="error_message_cannot_get_location">Cannot get your current location. Please make sure you have enable the device\'s location</string>
 </resources>

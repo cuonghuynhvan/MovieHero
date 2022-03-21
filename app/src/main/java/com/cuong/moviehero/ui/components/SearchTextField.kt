@@ -11,6 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -41,32 +42,29 @@ fun SearchTextField(
         })
     }
 
-    Surface(
-        modifier = modifier,
-        elevation = 4.dp,
+    OutlinedTextField(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colors.background, shape = shape)
+            .shadow(4.dp, shape = shape),
+        keyboardOptions = keyboardOptions,
+        keyboardActions = keyboardActions,
+        value = value,
+        onValueChange = onValueChange,
+        textStyle = textStyle.plus(TextStyle(MaterialTheme.colors.onBackground)),
         shape = shape,
-    ) {
-        OutlinedTextField(
-            modifier = Modifier.fillMaxWidth(),
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            value = value,
-            onValueChange = onValueChange,
-            textStyle = textStyle.plus(TextStyle(MaterialTheme.colors.onBackground)),
-            shape = shape,
-            placeholder = {
-                Text(
-                    text = placeholder,
-                    style = textStyle.copy(
-                        color = MaterialTheme.colors.onBackground.copy(
-                            0.6f
-                        )
-                    ),
-                    fontStyle = FontStyle.Italic
-                )
-            },
-        )
-    }
+        placeholder = {
+            Text(
+                text = placeholder,
+                style = textStyle.copy(
+                    color = MaterialTheme.colors.onBackground.copy(
+                        0.6f
+                    )
+                ),
+                fontStyle = FontStyle.Italic
+            )
+        },
+    )
 }
 
 @Preview(showBackground = true)
