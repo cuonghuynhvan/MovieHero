@@ -34,7 +34,7 @@ class SearchPlaceViewModel @Inject constructor(
             }
 
             _state.emit(_state.value.copy( showResultContent = true, showLoading = true ))
-            val placeList = useCases.searchPlaces.invoke(_state.value.searchValue)
+            val placeList = useCases.searchPlaces(_state.value.searchValue)
             _state.emit(_state.value.copy( showResultContent = true, showLoading = false, placeList = placeList ))
         }
     }
