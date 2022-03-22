@@ -8,4 +8,8 @@ data class GPSPoint(
     val lat: Double = 0.0,
     val lng: Double = 0.0,
     val createTime: Long = Date().time,
-)
+) {
+    override fun toString(): String {
+        return "${lat},${lng}"
+    }
+}

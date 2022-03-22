@@ -1,7 +1,5 @@
 package com.cuong.moviehero.ui.modules.search_place
 
-import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Surface
@@ -26,6 +24,7 @@ fun SearchPlaceContent(
     state: SearchPlaceContentState,
     onSearchValueChange: (newValue: String) -> Unit,
     onSearch: () -> Unit,
+    onPlaceItemClick: (place:Place) -> Unit,
 ) {
     var isFocusSearchBox: Boolean by remember { mutableStateOf(false) }
     val focusManager = LocalFocusManager.current
@@ -71,6 +70,7 @@ fun SearchPlaceContent(
                         .padding(16.dp)
                         .fillMaxSize(),
                     data = state.placeList,
+                    onItemClick = onPlaceItemClick,
                 )
 
                 Loading(
@@ -98,6 +98,7 @@ fun SearchPlaceContentReview() {
                 ),
                 onSearchValueChange = {},
                 onSearch = {},
+                onPlaceItemClick = {},
             )
         }
     }

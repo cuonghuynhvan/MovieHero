@@ -7,23 +7,31 @@ import android.content.pm.PackageManager
 import android.location.LocationManager
 import android.os.Looper
 import androidx.core.content.ContextCompat
+import com.cuong.moviehero.data.api.GoogleApiService
+import com.cuong.moviehero.data.entity.mapper.GoogleDirectionEntityDataMapper
 import com.cuong.moviehero.data.entity.mapper.PlaceEntityDataMapper
-import com.cuong.moviehero.domain.exception.GetLocationFailedException
-import com.cuong.moviehero.domain.exception.NeedRequestLocationPermissionException
+import com.cuong.moviehero.domain.exception.*
+import com.cuong.moviehero.domain.model.Direction
 import com.cuong.moviehero.domain.model.GPSPoint
 import com.cuong.moviehero.domain.model.Place
+import com.cuong.moviehero.domain.model.PlaceDetail
 import com.cuong.moviehero.domain.repository.LocationRepository
 import com.google.android.gms.location.*
 import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.net.FetchPlaceRequest
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRequest
+import retrofit2.HttpException
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-
 class LocationRepositoryImpl(
     private val context: Context,
+    private val googleApiService: GoogleApiService,
     private val placeEntityDataMapper: PlaceEntityDataMapper,
+    private val googleDirectionEntityDataMapper: GoogleDirectionEntityDataMapper,
 ) : LocationRepository {
     private var fusedLocationClient: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(context)
@@ -39,7 +47,7 @@ class LocationRepositoryImpl(
             cont.resume(placeEntityDataMapper.transform(it.autocompletePredictions))
         }
         runTask.addOnFailureListener {
-            throw it
+            cont.resumeWithException(NetworkConnectionException("connection error"))
         }
         runTask.addOnCanceledListener {
             cont.resume(emptyList())
@@ -100,7 +108,7 @@ class LocationRepositoryImpl(
         fusedLocationClient.requestLocationUpdates(locationRequest, callback, Looper.getMainLooper())
     }
 
-    fun isLocationEnable(): Boolean {
+    private fun isLocationEnable(): Boolean {
         val lm: LocationManager =
             context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         var gpsEnabled = false
@@ -123,5 +131,44 @@ class LocationRepositoryImpl(
             fusedLocationClient.removeLocationUpdates(it)
         }
         locationCallback = null
+    }
+
+    override suspend fun fetchPlaceDetail(id: String): PlaceDetail = suspendCoroutine { cont ->
+        val placesClient = Places.createClient(context)
+
+        val placeFields: List<com.google.android.libraries.places.api.model.Place.Field> = listOf(
+            com.google.android.libraries.places.api.model.Place.Field.ID,
+            com.google.android.libraries.places.api.model.Place.Field.NAME,
+            com.google.android.libraries.places.api.model.Place.Field.LAT_LNG,
+            com.google.android.libraries.places.api.model.Place.Field.ADDRESS
+        )
+        val request = FetchPlaceRequest.builder(id, placeFields).build()
+        val runTask = placesClient.fetchPlace(request)
+        runTask.addOnSuccessListener {
+            cont.resume(placeEntityDataMapper.transform(it.place))
+        }
+        runTask.addOnFailureListener {
+            cont.resumeWithException(NetworkConnectionException("connection error"))
+        }
+        runTask.addOnCanceledListener {
+            cont.resumeWithException(FetchPlaceDetailFailedException("cannot get place detail"))
+        }
+    }
+
+    override suspend fun fetchDirectionFromLocationToPlace(
+        location: GPSPoint,
+        placeId: String
+    ): Direction {
+        try {
+            val result = googleApiService.fetchDirection(location.toString(), "place_id:${placeId}")
+            val direction = googleDirectionEntityDataMapper.transform(result)
+            return direction ?: throw FetchGoogleDirectionFailedException("invalid data")
+        } catch (e: HttpException) {
+            throw NetworkConnectionException("internet connection issue")
+        } catch (e: SocketTimeoutException) {
+            throw NetworkConnectionException("internet connection issue")
+        } catch (e: UnknownHostException) {
+            throw NetworkConnectionException("internet connection issue")
+        }
     }
 }

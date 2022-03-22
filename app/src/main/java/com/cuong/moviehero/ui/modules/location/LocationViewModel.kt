@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import com.cuong.moviehero.R
 import com.cuong.moviehero.domain.exception.NeedRequestLocationPermissionException
 import com.cuong.moviehero.domain.model.GPSPoint
+import com.cuong.moviehero.domain.model.Place
 import com.cuong.moviehero.domain.use_case.LocationUseCases
 import com.cuong.moviehero.ui.modules.common.ExceptionMessageHandler
 import com.cuong.moviehero.ui.modules.common.UIEventStateViewModel
@@ -22,9 +23,11 @@ class LocationViewModel @Inject constructor(
     errorMessageHandler: ExceptionMessageHandler,
 ) : UIEventStateViewModel(errorMessageHandler) {
 
+    private var currentLocation = GPSPoint(10.8020047, 106.6391917) // TODO remove this hard code
+
     private val _state = MutableStateFlow(
         LocationContentState(
-            currentLocation = GPSPoint(10.8020047, 106.6391917) // TODO remove this hard code
+            centerPoint = currentLocation,
         )
     )
     val state = _state.asStateFlow()
@@ -35,9 +38,10 @@ class LocationViewModel @Inject constructor(
     val onCurrentLocationClick: () -> Unit = {
         viewModelScope.launch(Dispatchers.IO) {
             try {
+                currentLocation = useCases.requestCurrentLocation()
                 _state.emit(
                     _state.value.copy(
-                        currentLocation = useCases.requestCurrentLocation()
+                        centerPoint = currentLocation
                     )
                 )
             } catch (exception: Exception) {
@@ -59,12 +63,38 @@ class LocationViewModel @Inject constructor(
         }
     }
 
+    val onPlaceItemClick: (place: Place) -> Unit = {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val placeDetail = useCases.fetchPlaceDetail(it.id)
+                _state.emit(
+                    _state.value.copy(
+                        centerPoint = placeDetail.gpsPoint,
+                        showCenterPointPin = true,
+                        centerPointName = placeDetail.name,
+                    )
+                )
+
+                val direction = useCases.fetchDirectionFromLocationToPlace(currentLocation, it.id)
+                _state.emit(
+                    _state.value.copy(
+                        showDirection = true,
+                        direction = direction,
+                    )
+                )
+            } catch (exception: Exception) {
+                transformExceptionToUIState(exception)
+            }
+        }
+    }
+
     fun requestCurrentLocationWhenStart() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
+                currentLocation = useCases.requestCurrentLocation()
                 _state.emit(
                     _state.value.copy(
-                        currentLocation = useCases.requestCurrentLocation()
+                        centerPoint = currentLocation
                     )
                 )
             } catch (exception: Exception) {}

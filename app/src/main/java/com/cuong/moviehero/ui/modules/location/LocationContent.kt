@@ -26,7 +26,11 @@ fun LocationContent(
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         GoogleMapWrapper(
             modifier = Modifier.fillMaxSize(),
-            currentLocation = state.currentLocation,
+            centerPoint = state.centerPoint,
+            centerPointName = state.centerPointName,
+            showCenterPointPin = state.showCenterPointPin,
+            showDirection = state.showDirection,
+            direction = state.direction,
         )
         OutlinedButton(
             modifier= Modifier.align(Alignment.BottomEnd)

@@ -20,7 +20,8 @@ import com.cuong.moviehero.ui.theme.MovieHeroTheme
 fun PlaceLazyColumn(
     modifier: Modifier = Modifier,
     data: List<Place> = emptyList(),
-    shape: Shape = RoundedCornerShape(16.dp)
+    shape: Shape = RoundedCornerShape(16.dp),
+    onItemClick: (place: Place) -> Unit = {}
 ) {
     Surface(
         modifier = modifier,
@@ -30,11 +31,12 @@ fun PlaceLazyColumn(
         LazyColumn(
             modifier = Modifier.padding(8.dp),
         ) {
-            items(data, key = { it.placeId }) { place ->
+            items(data, key = { it.id }) { place ->
                 PlaceItem(
                     modifier = Modifier.fillMaxWidth(),
                     name = place.name,
                     address = place.address,
+                    onClick = { onItemClick(place) }
                 )
                 HorizontalLine()
             }

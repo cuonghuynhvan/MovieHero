@@ -38,7 +38,9 @@ fun Location(
     LocationContent(
         state = state,
         searchContent = {
-            SearchPlace()
+            SearchPlace(
+                onPlaceItemClick = viewModel.onPlaceItemClick
+            )
         },
         onCurrentLocationClick = viewModel.onCurrentLocationClick,
     )

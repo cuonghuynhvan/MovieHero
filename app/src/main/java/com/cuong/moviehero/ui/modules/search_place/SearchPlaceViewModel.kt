@@ -16,7 +16,6 @@ class SearchPlaceViewModel @Inject constructor(
     private val useCases: LocationUseCases,
     errorMessageHandler: ExceptionMessageHandler,
 ) : UIEventStateViewModel(errorMessageHandler) {
-
     private val _state = MutableStateFlow(SearchPlaceContentState())
     val state = _state.asStateFlow()
 
@@ -45,6 +44,12 @@ class SearchPlaceViewModel @Inject constructor(
             } finally {
                 _state.emit(_state.value.copy( showLoading = false ))
             }
+        }
+    }
+
+    fun onPlaceItemClick() {
+        viewModelScope.launch {
+            _state.emit(_state.value.copy( showResultContent = false ))
         }
     }
 }
