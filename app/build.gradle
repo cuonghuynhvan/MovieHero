@@ -29,6 +29,7 @@ android {
         debug {
             buildConfigField "String", "GOOGLE_API_KEY", properties.getProperty('GOOGLE_API_KEY')
             buildConfigField "String", "THE_MOVIE_DB_API_KEY", properties.getProperty('THE_MOVIE_DB_API_KEY')
+            buildConfigField "String", "THE_MOVIE_DB_API_URL", '"https://api.themoviedb.org/3/"'
             buildConfigField "String", "GOOGLE_API_URL", '"https://maps.googleapis.com/maps/api/"'
         }
         release {
