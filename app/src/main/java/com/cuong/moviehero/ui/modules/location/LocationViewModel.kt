@@ -5,7 +5,7 @@ import com.cuong.moviehero.R
 import com.cuong.moviehero.domain.exception.NeedRequestLocationPermissionException
 import com.cuong.moviehero.domain.model.GPSPoint
 import com.cuong.moviehero.domain.model.Place
-import com.cuong.moviehero.domain.use_case.LocationUseCases
+import com.cuong.moviehero.domain.use_case.location.LocationUseCases
 import com.cuong.moviehero.ui.modules.common.ExceptionMessageHandler
 import com.cuong.moviehero.ui.modules.common.UIEventStateViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

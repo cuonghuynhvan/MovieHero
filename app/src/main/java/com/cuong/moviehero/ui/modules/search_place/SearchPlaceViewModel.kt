@@ -1,7 +1,7 @@
 package com.cuong.moviehero.ui.modules.search_place
 
 import androidx.lifecycle.viewModelScope
-import com.cuong.moviehero.domain.use_case.LocationUseCases
+import com.cuong.moviehero.domain.use_case.location.LocationUseCases
 import com.cuong.moviehero.ui.modules.common.ExceptionMessageHandler
 import com.cuong.moviehero.ui.modules.common.UIEventStateViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

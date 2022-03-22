@@ -1,4 +1,4 @@
-package com.cuong.moviehero.domain.use_case
+package com.cuong.moviehero.domain.use_case.location
 
 import androidx.annotation.WorkerThread
 import com.cuong.moviehero.domain.model.Place

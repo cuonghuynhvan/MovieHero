@@ -29,8 +29,8 @@ android {
         debug {
             buildConfigField "String", "GOOGLE_API_KEY", properties.getProperty('GOOGLE_API_KEY')
             buildConfigField "String", "THE_MOVIE_DB_API_KEY", properties.getProperty('THE_MOVIE_DB_API_KEY')
-            buildConfigField "String", "THE_MOVIE_DB_API_URL", '"https://api.themoviedb.org/3/"'
-            buildConfigField "String", "THE_MOVIE_DB_IMAGE_URL", '"https://image.tmdb.org/t/p/original"'
+            buildConfigField "String", "THE_MOVIE_DB_API_URL", '"https://api.themoviedb.org/"'
+            buildConfigField "String", "THE_MOVIE_DB_IMAGE_URL", '"https://image.tmdb.org/t/p/w200"'
             buildConfigField "String", "GOOGLE_API_URL", '"https://maps.googleapis.com/maps/api/"'
         }
         release {
@@ -96,4 +96,6 @@ dependencies {
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.google.code.gson:gson:2.9.0'
+
+    implementation "com.github.skydoves:landscapist-fresco:1.4.3"
 }

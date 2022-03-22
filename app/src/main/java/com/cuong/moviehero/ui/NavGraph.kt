@@ -27,7 +27,9 @@ fun NavGraph(
             )
         }
         composable(Routes.HOME_SCREEN) {
-            Home()
+            Home(
+                onOpenMovieDetail = {}
+            )
         }
     }
 }

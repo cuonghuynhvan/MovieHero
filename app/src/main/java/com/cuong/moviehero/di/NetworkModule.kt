@@ -2,6 +2,7 @@ package com.cuong.moviehero.di
 
 import com.cuong.moviehero.data.api.APIBuilder
 import com.cuong.moviehero.data.api.GoogleApiService
+import com.cuong.moviehero.data.api.MovieApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -13,20 +14,15 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    @Qualifier
-    @Retention(AnnotationRetention.BINARY)
-    annotation class GoogleApi
-
-    @GoogleApi
     @Provides
     @Singleton
-    fun provideGoogleApiRetrofit(): Retrofit {
-        return APIBuilder.getGoogleInstance()
+    fun provideGoogleApiService(): GoogleApiService {
+        return APIBuilder.getGoogleInstance().create(GoogleApiService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideGoogleApiService(@GoogleApi retrofit: Retrofit): GoogleApiService {
-        return retrofit.create(GoogleApiService::class.java)
+    fun provideMovieApiService(): MovieApiService {
+        return APIBuilder.getMovieInstance().create(MovieApiService::class.java)
     }
 }

@@ -29,5 +29,3 @@ fun SearchPlace(
         onPlaceItemClick = handlePlaceItemClick,
     )
 }
-
-// https://maps.googleapis.com/maps/api/directions/json?origin=Disneyland&destination=Universal+Studios+Hollywood&key=AIzaSyDYfto13GBPZ4SD51Fks0EZwWXQctgLvHI
