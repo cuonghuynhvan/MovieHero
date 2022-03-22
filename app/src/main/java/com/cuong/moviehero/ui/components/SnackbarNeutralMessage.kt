@@ -41,7 +41,7 @@ fun SnackbarNeutralMessage(
 @Preview(showBackground = true)
 @Composable
 fun SnackbarNeutralMessagePreview() {
-    MovieHeroTheme() {
+    MovieHeroTheme {
         Column(
             modifier = Modifier
                 .background(Color(0xffE5E5E5))

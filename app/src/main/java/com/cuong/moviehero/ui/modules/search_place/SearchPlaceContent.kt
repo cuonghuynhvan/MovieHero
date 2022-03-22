@@ -86,7 +86,7 @@ fun SearchPlaceContent(
 @Composable
 fun SearchPlaceContentReview() {
     MovieHeroTheme {
-        Surface() {
+        Surface {
             SearchPlaceContent(
                 state = SearchPlaceContentState(
                     placeList = listOf(

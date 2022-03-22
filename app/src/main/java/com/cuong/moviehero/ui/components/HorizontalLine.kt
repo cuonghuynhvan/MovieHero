@@ -25,7 +25,7 @@ fun HorizontalLine(
 @Preview
 @Composable
 fun HorizontalLineReview() {
-    MovieHeroTheme() {
+    MovieHeroTheme {
         Column {
             HorizontalLine()
             Spacer(modifier = Modifier.height(30.dp))

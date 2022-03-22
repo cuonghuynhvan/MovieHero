@@ -56,7 +56,7 @@ fun LocationContent(
 @Preview(showBackground = true)
 @Composable
 fun LocationContentReview() {
-    MovieHeroTheme() {
+    MovieHeroTheme {
         LocationContent(
             state = LocationContentState(),
             searchContent = {},
