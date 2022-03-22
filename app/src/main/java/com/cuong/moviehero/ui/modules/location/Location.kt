@@ -13,7 +13,8 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun Location(
-    viewModel: LocationViewModel = hiltViewModel()
+    viewModel: LocationViewModel = hiltViewModel(),
+    onOpenHomePage: () -> Unit,
 ) {
     val state: LocationContentState by viewModel.state.collectAsState()
     val requestPermission: Boolean by viewModel.requestPermissionState.collectAsState(false)
@@ -43,5 +44,6 @@ fun Location(
             )
         },
         onCurrentLocationClick = viewModel.onCurrentLocationClick,
+        onClickCenterPointPin = onOpenHomePage,
     )
 }

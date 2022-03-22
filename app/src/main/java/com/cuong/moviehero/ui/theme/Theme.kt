@@ -17,6 +17,7 @@ private val LightColorPalette = lightColors(
     primary = Purple500,
     primaryVariant = Purple700,
     secondary = Teal200,
+    onPrimary = Color.White,
     background = Color.White,
     onBackground = Color.Black,
 

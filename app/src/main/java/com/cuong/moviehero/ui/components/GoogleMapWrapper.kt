@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.compose.*
 
 @Composable
@@ -21,6 +22,7 @@ fun GoogleMapWrapper(
     showCenterPointPin: Boolean = false,
     showDirection: Boolean = false,
     direction: Direction = Direction(),
+    onClickCenterPointPin: (Marker) -> Boolean = { true },
 ) {
     val cameraPositionState = rememberCameraPositionState {
         val centerLocation = LatLng(centerPoint.lat, centerPoint.lng)
@@ -75,6 +77,7 @@ fun GoogleMapWrapper(
             Marker(
                 position = centerLocation,
                 title = centerPointName,
+                onClick = onClickCenterPointPin,
             )
         }
     }

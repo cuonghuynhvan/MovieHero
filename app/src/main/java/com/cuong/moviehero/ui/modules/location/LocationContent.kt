@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.OutlinedButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -16,13 +17,20 @@ import androidx.compose.ui.unit.dp
 import com.cuong.moviehero.R
 import com.cuong.moviehero.ui.components.GoogleMapWrapper
 import com.cuong.moviehero.ui.theme.MovieHeroTheme
+import com.google.android.gms.maps.model.Marker
 
 @Composable
 fun LocationContent(
     state: LocationContentState,
     searchContent: @Composable () -> Unit,
     onCurrentLocationClick: () -> Unit,
+    onClickCenterPointPin: () -> Unit,
 ) {
+    val handleClickCenterPointPin: (Marker) -> Boolean = remember(onClickCenterPointPin) {{
+        onClickCenterPointPin()
+        true
+    }}
+
     BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
         GoogleMapWrapper(
             modifier = Modifier.fillMaxSize(),
@@ -31,6 +39,7 @@ fun LocationContent(
             showCenterPointPin = state.showCenterPointPin,
             showDirection = state.showDirection,
             direction = state.direction,
+            onClickCenterPointPin = handleClickCenterPointPin
         )
         OutlinedButton(
             modifier= Modifier.align(Alignment.BottomEnd)
@@ -61,6 +70,7 @@ fun LocationContentReview() {
             state = LocationContentState(),
             searchContent = {},
             onCurrentLocationClick = {},
+            onClickCenterPointPin = {},
         )
     }
 }

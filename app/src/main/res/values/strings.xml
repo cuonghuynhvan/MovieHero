@@ -8,4 +8,6 @@
     <string name="message_request_location_revoked">Yay! Thanks for letting me access your approximate location. But you know what would be great? If you allow me to know where you exactly are. Thank you!</string>
     <string name="button_request_permission">Request permissions</string>
     <string name="error_message_cannot_get_location">Cannot get your current location. Please make sure you have enable the device\'s location</string>
+    <string name="button_tab_now_playing">Now Playing</string>
+    <string name="button_tab_top_rated">Top Rated</string>
 </resources>
