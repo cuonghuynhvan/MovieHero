@@ -1,4 +1,4 @@
-package com.cuong.moviehero.ui.modules.home
+package com.cuong.moviehero.ui.modules.top_rated
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.Scaffold
@@ -22,28 +22,16 @@ import com.cuong.moviehero.ui.theme.MovieHeroTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun HomeContent(
-    activeIndex: Int = 0,
-    onTabClick: (Int) -> Unit = {},
-    content: @Composable (PaddingValues) -> Unit,
-) {
-    val scaffoldState = rememberScaffoldState()
+fun TopRatedContent(
 
-    Scaffold(
-        scaffoldState = scaffoldState,
-        topBar = { TitleBar() },
-        bottomBar = { BottomTabBar(activeIndex = activeIndex, onTabClick = onTabClick) },
-        content = content,
-    )
+) {
+
 }
 
 @Preview(showBackground = true)
 @Composable
-fun HomeContentReview() {
+fun TopRatedContentReview() {
     MovieHeroTheme {
-        HomeContent(
-            onTabClick = {},
-            content = {},
-        )
+        TopRatedContent()
     }
 }

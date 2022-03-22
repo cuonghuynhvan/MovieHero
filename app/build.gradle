@@ -30,6 +30,7 @@ android {
             buildConfigField "String", "GOOGLE_API_KEY", properties.getProperty('GOOGLE_API_KEY')
             buildConfigField "String", "THE_MOVIE_DB_API_KEY", properties.getProperty('THE_MOVIE_DB_API_KEY')
             buildConfigField "String", "THE_MOVIE_DB_API_URL", '"https://api.themoviedb.org/3/"'
+            buildConfigField "String", "THE_MOVIE_DB_IMAGE_URL", '"https://image.tmdb.org/t/p/original"'
             buildConfigField "String", "GOOGLE_API_URL", '"https://maps.googleapis.com/maps/api/"'
         }
         release {
@@ -89,6 +90,7 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:2.5.0'
 
     implementation "com.google.accompanist:accompanist-permissions:0.24.4-alpha"
+    implementation "com.google.accompanist:accompanist-swiperefresh:0.24.4-alpha"
 
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
