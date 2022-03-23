@@ -10,4 +10,6 @@
     <string name="error_message_cannot_get_location">Cannot get your current location. Please make sure you have enable the device\'s location</string>
     <string name="button_tab_now_playing">Now Playing</string>
     <string name="button_tab_top_rated">Top Rated</string>
+    <string name="title_movie_detail">Movie Detail</string>
+    <string name="text_runtime">%dh %dmin</string>
 </resources>

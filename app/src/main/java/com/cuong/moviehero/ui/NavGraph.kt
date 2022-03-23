@@ -7,10 +7,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.cuong.moviehero.ui.modules.home.Home
 import com.cuong.moviehero.ui.modules.location.Location
+import com.cuong.moviehero.ui.modules.movie_detail.MovieDetail
 
 object Routes {
     const val LOCATION_SCREEN = "location"
     const val HOME_SCREEN = "home"
+    const val MOVIE_DETAIL_SCREEN = "movie-detail"
 }
 
 @Composable
@@ -28,7 +30,12 @@ fun NavGraph(
         }
         composable(Routes.HOME_SCREEN) {
             Home(
-                onOpenMovieDetail = {}
+                onOpenMovieDetail = { navController.navigate(Routes.MOVIE_DETAIL_SCREEN) }
+            )
+        }
+        composable(Routes.MOVIE_DETAIL_SCREEN) {
+            MovieDetail(
+                onBackClick = { navController.popBackStack() }
             )
         }
     }
