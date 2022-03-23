@@ -1,6 +1,6 @@
 # MovieHero
 
-This is a showcase project which I use to combine the domain-driven architecture and the Jetpack compose. It basically has 3 screens.
+This is a showcase project in which I have tried to use both the domain-driven architecture and the Jetpack compose. It basically has 3 screens.
 + The location screen will allow user to search a location using text, GPS point,... then give the user a direction to it.
 + The home screen will show 2 movie lists: now playing and top-rated.
 + The movie detail screen will show some movie detail when the user clicks on it the home screen.
