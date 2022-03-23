@@ -35,6 +35,7 @@ class MovieEntityDataMapper @Inject constructor() {
             rate = data.voteAverage?.toFloat() ?: 0f,
             genres = data.genres?.map { it.name ?: "" } ?: emptyList(),
             runtime = data.runtime ?: 0,
+            releaseDate = data.releaseDate ?: "",
         )
     }
 }

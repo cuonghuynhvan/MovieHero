@@ -68,6 +68,7 @@ fun MovieDetailContent(
                 rate = state.movieDetail.rate,
                 runtime = state.movieDetail.runtime,
                 genes = state.movieDetail.genres,
+                releaseDate = state.movieDetail.releaseDate,
             )
             HorizontalLine()
             Text(

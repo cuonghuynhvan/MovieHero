@@ -8,4 +8,5 @@ data class MovieDetail(
     val rate: Float = 0f,
     val genres: List<String> = emptyList(),
     val runtime: Int = 0,
+    val releaseDate: String = "",
 )

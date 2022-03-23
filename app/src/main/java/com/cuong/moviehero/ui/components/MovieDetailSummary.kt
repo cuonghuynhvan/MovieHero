@@ -26,11 +26,14 @@ import com.cuong.moviehero.ui.theme.Yellow
 fun MovieDetailSummary(
     modifier: Modifier = Modifier,
     title: String = "",
+    releaseDate: String = "",
     rate: Float = 0f,
     maxRate: Int = 10,
     runtime: Int = 0,
     genes: List<String> = emptyList(),
 ) {
+    val releaseYear = releaseDate.split('-').getOrNull(0) ?: ""
+
     ConstraintLayout(modifier = modifier
         .fillMaxWidth()
         .padding(vertical = 8.dp)
@@ -44,7 +47,7 @@ fun MovieDetailSummary(
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                 },
-            text = title,
+            text = "$title($releaseYear)",
             style = MaterialTheme.typography.body1.copy(
                 color = MaterialTheme.colors.onBackground,
             ),
