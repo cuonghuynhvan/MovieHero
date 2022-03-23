@@ -67,7 +67,7 @@ fun MovieDetailContent(
                 title = state.movieDetail.title,
                 rate = state.movieDetail.rate,
                 runtime = state.movieDetail.runtime,
-                genes = state.movieDetail.genes,
+                genes = state.movieDetail.genres,
             )
             HorizontalLine()
             Text(
@@ -90,7 +90,8 @@ fun MovieDetailContent(
                 .constrainAs(loadingRef) {
                     top.linkTo(titleBarRef.bottom)
                     bottom.linkTo(parent.bottom)
-                    width = Dimension.matchParent
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
                 },
             show = state.showLoading,
         )

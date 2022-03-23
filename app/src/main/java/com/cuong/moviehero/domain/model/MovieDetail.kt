@@ -6,6 +6,6 @@ data class MovieDetail(
     val overview: String = "",
     val backdropImageUrl: String = "",
     val rate: Float = 0f,
-    val genes: List<String> = emptyList(),
+    val genres: List<String> = emptyList(),
     val runtime: Int = 0,
 )
